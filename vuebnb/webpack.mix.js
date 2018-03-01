@@ -22,6 +22,13 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .copy('node_modules/open-sans-all/fonts', 'public/fonts')
     .copy('node_modules/font-awesome/fonts', 'public/fonts')
     .copy('resources/assets/images', 'public/images')
+    .webpackConfig({
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.runtime.esm.js'
+            }
+        }
+    })
     .browserSync({
         host: '192.168.10.10',
         proxy: process.env.APP_URL,

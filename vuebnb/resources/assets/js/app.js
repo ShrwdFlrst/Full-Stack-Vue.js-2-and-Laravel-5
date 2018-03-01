@@ -1,30 +1,11 @@
-import Vue from 'vue';
 import "core-js/fn/object/assign";
-import {populateAmenitiesAndPrices} from "./helpers";
-import ImageCarousel from '../components/ImageCarousel'
-import ModalWindow from '../components/ModalWindow'
-import HeaderImage from '../components/HeaderImage'
-import FeatureList from '../components/FeatureList'
-import ExpandableText from '../components/ExpandableText'
+import Vue from 'vue';
 
-let model = JSON.parse(window.vuebnb_listing_model);
-model = populateAmenitiesAndPrices(model);
+import App from '../components/App'
+import router from './router'
 
-let app = new Vue({
+var app = new Vue({
     el: '#app',
-    data: Object.assign(model, {
-        contracted: true,
-    }),
-    components: {
-        ImageCarousel,
-        ModalWindow,
-        HeaderImage,
-        FeatureList,
-        ExpandableText
-    },
-    methods: {
-        openModal() {
-            this.$refs.imagemodal.modalOpen = true;
-        }
-    }
+    render: h => h(App),
+    router
 });
