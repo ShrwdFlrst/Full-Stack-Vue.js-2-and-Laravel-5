@@ -7,6 +7,7 @@
             </router-link>
         </div>
         <router-view></router-view>
+        <custom-footer></custom-footer>
     </div>
 </template>
 <style>
@@ -34,3 +35,12 @@
         text-decoration: none;
     }
 </style>
+<script>
+    import CustomFooter from './CustomFooter'
+
+    export default {
+        components: {
+            CustomFooter
+        }
+    }
+</script>
