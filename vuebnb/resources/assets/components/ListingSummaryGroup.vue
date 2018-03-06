@@ -3,11 +3,11 @@
         <h1>Places in {{ country }}</h1>
         <div class="listing-carousel">
             <div class="controls">
-                <carousel-control dir="left"></carousel-control>
-                <carousel-control dir="right"></carousel-control>
+                <carousel-control dir="left" @change-image="change" :style="leftArrowStyle"></carousel-control>
+                <carousel-control dir="right" @change-image="change" :style="rightArrowStyle"></carousel-control>
             </div>
             <div class="listing-summaries-wrapper">
-                <div class="listing-summaries">
+                <div class="listing-summaries" :style="style">
                     <listing-summary
                             v-for="listing in listings"
                             :listing="listing"
@@ -17,13 +17,40 @@
             </div>
         </div>
     </div>
-    </template>
+</template>
 <script>
     import ListingSummary from './ListingSummary.vue';
     import CarouselControl from './CarouselControl.vue';
 
+    const rowSize = 3;
+    const listingSummaryWidth = 365;
+
     export default {
-        props: [ 'country', 'listings' ],
+        props: ['country', 'listings'],
+        data() {
+            return {
+                offset: 0
+            }
+        },
+        methods: {
+            change(val) {
+                let newVal = this.offset + parseInt(val);
+                if (newVal >= 0 && newVal <= this.listings.length - rowSize) {
+                    this.offset = newVal;
+                }
+            }
+        },
+        computed: {
+            style() {
+                return {transform: `translateX(${this.offset * -listingSummaryWidth}px)`}
+            },
+            leftArrowStyle() {
+                return { visibility: (this.offset > 0 ? 'visible' : 'hidden') }
+            },
+            rightArrowStyle() {
+                return { visibility: (this.offset < (this.listings.length - rowSize) ? 'visible' : 'hidden') }
+            },
+        },
         components: {
             ListingSummary,
             CarouselControl
@@ -39,7 +66,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        overflow: hidden;
+        transition: transform 0.5s;
     }
 
     .listing-summaries > .listing-summary {
@@ -63,7 +90,7 @@
         width: calc(100% + 90px);
     }
 
-    .listing-carousel .controls .carousel-control{
+    .listing-carousel .controls .carousel-control {
         color: #c5c5c5;
         font-size: 1.5rem;
         cursor: pointer;
