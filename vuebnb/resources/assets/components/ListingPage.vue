@@ -3,7 +3,9 @@
         <header-image
                 v-if="images[0]"
                 :image-url="images[0]"
-                @header-clicked="openModal"></header-image>
+                @header-clicked="openModal"
+                :id="id"
+        ></header-image>
         <div class="container">
             <div class="heading">
                 <h1>{{ title }}</h1>
@@ -43,11 +45,12 @@
     import FeatureList from './FeatureList.vue';
     import HeaderImage from './HeaderImage.vue';
     import ExpandableText from './ExpandableText.vue';
-    import routeMixin from '../js/route-mixin'
+    import routeMixin from '../js/route-mixin';
 
     export default {
         data() {
             return {
+                id: null,
                 title: null,
                 about: null,
                 address: null,
