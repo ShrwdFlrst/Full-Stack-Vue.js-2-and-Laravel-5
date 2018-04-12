@@ -1,11 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
+axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN': window.csrf_token
+};
+
 export default new Vuex.Store({
     state: {
-        saved: [1, 15],
+        saved: [],
         auth: false,
         listing_summaries: [],
         listings: []
@@ -36,6 +42,15 @@ export default new Vuex.Store({
                 state.listings.push(data.listing);
             } else {
                 state.listing_summaries = data.listings;
+            }
+        }
+    },
+    actions: {
+        toggleSaved({ commit, state }, id) {
+            if (state.auth) {
+                axios.post('/api/user/toggle_saved', { id }).then(() => commit('toggleSaved', id));
+            } else {
+                router.push('login');
             }
         }
     }
