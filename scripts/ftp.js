@@ -6,12 +6,12 @@ const recursive = require("recursive-readdir");
 
 let folders = [
   'css',
-  'js',
-  'fonts'
+  'js'
 ];
 
 if (process.env.FTP_SKIP_IMAGES == 0) {
   folders.push('images');
+  folders.push('fonts');
 }
 
 let local_dir_base = 'public';
