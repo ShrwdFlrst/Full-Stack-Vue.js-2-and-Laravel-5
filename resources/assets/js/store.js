@@ -51,7 +51,7 @@ export default new Vuex.Store({
             if (state.auth) {
                 axios.post('/api/user/toggle_saved', { id }).then(() => commit('toggleSaved', id));
             } else {
-                router.push('login');
+                router.push('/login');
             }
         }
     }
