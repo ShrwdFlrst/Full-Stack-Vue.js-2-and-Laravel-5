@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vuebnb</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/vue-style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ cdn('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ cdn('css/vue-style.css') }}" type="text/css">
 
     <script type="text/javascript">
         window.vuebnb_server_data = "{!! addslashes(json_encode($data)) !!}";
-        console.log(window.vuebnb_server_data);
-        window.csrf_token = "{{csrf_token()}}"
+        window.csrf_token = "{{ csrf_token() }}";
+        window.cdn_url = "{{ cdn('') }}";
     </script>
 </head>
 <body>
 <div id="app"></div>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ cdn('js/app.js') }}"></script>
 
 @if (env('APP_ENV')=='local')
     <script id="__bs_script__">//<![CDATA[

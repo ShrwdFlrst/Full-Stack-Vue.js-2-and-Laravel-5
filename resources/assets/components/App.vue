@@ -2,7 +2,7 @@
     <div>
         <div id="toolbar">
             <router-link :to="{ name: 'home' }">
-                <img src="/images/logo.png" alt="" class="icon">
+                <img :src="logoUrl" alt="" class="icon">
                 <h1>Vuebnb</h1>
             </router-link>
             <ul class="links">
@@ -90,6 +90,11 @@
     export default {
         components: {
             CustomFooter
+        },
+        computed: {
+            logoUrl() {
+                return `${window.cdn_url || ''}images/logo.png`;
+            }
         },
         data() {
             return {
